@@ -1,11 +1,11 @@
 # dependencies
-/node_modules
+node_modules
 
 # testing
 /coverage
 
 # production
-/build
+/dist
 
 # css
 src/**/*.css
@@ -20,3 +20,5 @@ src/**/*.css
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
+*.log
