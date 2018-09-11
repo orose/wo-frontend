@@ -14,7 +14,9 @@ router.get('/', function(req, res) {
       title: 'Second workorder',
     },
   ];
-  res.json(data);
+  setTimeout(function() {
+    res.json(data);
+  }, 1000);
 });
 
 module.exports = router;

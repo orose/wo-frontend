@@ -12,7 +12,9 @@ router.get('/', function(req, res) {
       name: 'Systek As',
     },
   ];
-  res.json(data);
+  setTimeout(function() {
+    res.json(data);
+  }, 1000);
 });
 
 module.exports = router;
