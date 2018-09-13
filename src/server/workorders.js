@@ -7,11 +7,13 @@ router.get('/', function(req, res) {
       id: 0,
       customer_id: 1,
       title: 'First workorder',
+      description: 'This is the description of the first workorder',
     },
     {
       id: 1,
       customer_id: 0,
       title: 'Second workorder',
+      description: 'This is the description of the second workorder',
     },
   ];
   setTimeout(function() {
