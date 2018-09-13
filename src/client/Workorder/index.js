@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import WorkorderList from './WorkorderList';
 
 class Workorder extends Component {
-  state = { workorders: null };
-
-  componentDidMount() {
-    fetch('/api/workorders')
-      .then(res => res.json())
-      .then(data => this.setState({ workorders: data }));
-  }
-
   render() {
-    const { workorders } = this.state;
-    let workorderList = {};
-    if (workorders) {
-      workorderList = workorders.map(w => (
-        <li key={w.id}>
-          <strong>{w.title}</strong>
-        </li>
-      ));
-    }
-
     return (
       <section>
         <h1>Workorder</h1>
-        {workorders ? <ul>{workorderList}</ul> : <p>Loading.. please wait!</p>}
+        <WorkorderList workorders={this.props.workorders} />
       </section>
     );
   }
 }
 
-export default Workorder;
+function mapStateToProps(state) {
+  const { workorders, customers } = state;
+
+  return {
+    customers,
+    workorders,
+  };
+}
+
+export default connect(mapStateToProps)(Workorder);
