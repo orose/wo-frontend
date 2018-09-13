@@ -1,13 +1,25 @@
-let nextWorkorderId = 0;
-export const addWorkorder = workorder => ({
-  type: 'ADD_WORKORDER',
-  id: nextWorkorderId++,
-  workorder,
-});
+export const WORKORDERS_REQUEST = 'WORKORDERS_REQUEST';
+export const WORKORDERS_RECEIVE = 'WORKORDERS_RECEIVE';
 
-let nextCustomerId = 0;
-export const addCustomer = customer => ({
-  type: 'ADD_CUSTOMER',
-  id: nextCustomerId++,
-  customer,
-});
+function requestWorkorders() {
+  return {
+    type: WORKORDERS_REQUEST,
+  };
+}
+
+function receiveWorkorders(json) {
+  return {
+    type: WORKORDERS_RECEIVE,
+    workorders: json,
+    receivedAt: Date.now(),
+  };
+}
+
+export function fetchWorkorders() {
+  return dispatch => {
+    dispatch(requestWorkorders());
+    return fetch('/api/workorders')
+      .then(response => response.json())
+      .then(json => dispatch(receiveWorkorders(json)));
+  };
+}

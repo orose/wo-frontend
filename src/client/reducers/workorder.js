@@ -1,21 +1,17 @@
-const workorders = (
-  state = [
-    {
-      id: 0,
-      customer_id: 0,
-      title: 'First workorder',
-      description: 'The description of the first workorder',
-    },
-    {
-      id: 1,
-      customer_id: 1,
-      title: 'Second workorder',
-      description: 'The description of the second workorder',
-    },
-  ],
-  action,
-) => {
+import { WORKORDERS_RECEIVE, WORKORDERS_REQUEST } from '../actions';
+
+const workorders = (state = [], action) => {
   switch (action.type) {
+    case WORKORDERS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case WORKORDERS_RECEIVE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.workorders,
+        lastUpdated: action.receivedAt,
+      });
     case 'ADD_WORKORDER':
       return [
         ...state,
