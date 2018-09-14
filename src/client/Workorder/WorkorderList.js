@@ -15,10 +15,10 @@ class WorkorderList extends Component {
   }
 
   render() {
-    const { workorders } = this.props;
+    const { workorders, isFetching } = this.props;
     let workorderList = [];
 
-    if (workorders) {
+    if (!isFetching && workorders) {
       workorderList = workorders.map(w => (
         <li key={w.id}>
           <strong>{w.title}</strong>
@@ -26,15 +26,21 @@ class WorkorderList extends Component {
           {w.description}
         </li>
       ));
+      return <ul>{workorderList}</ul>;
     }
 
-    return <ul>{workorderList}</ul>;
+    if (isFetching) {
+      return <p>Loading...</p>;
+    }
+
+    return null;
   }
 }
 
 function mapStateToProps(state) {
   return {
     workorders: state.workorders.items,
+    isFetching: state.workorders.isFetching,
   };
 }
 
