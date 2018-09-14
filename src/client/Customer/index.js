@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CustomerList from './CustomerList';
+import ComponentHeader from '../common/ComponentHeader';
 
 import { fetchCustomers } from '../actions';
 
@@ -14,7 +15,7 @@ class Customer extends Component {
   render() {
     return (
       <section>
-        <h1>Customer</h1>
+        <ComponentHeader text="Customer" />
         <CustomerList
           customers={this.props.customers}
           isFetching={this.props.isFetching}

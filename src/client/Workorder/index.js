@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WorkorderList from './WorkorderList';
+import ComponentHeader from '../common/ComponentHeader';
 
 import { fetchWorkorders } from '../actions';
 
@@ -14,7 +15,7 @@ class Workorder extends Component {
   render() {
     return (
       <section>
-        <h1>Workorder</h1>
+        <ComponentHeader text="Workorder" />
         <WorkorderList
           workorders={this.props.workorders}
           isFetching={this.props.isFetching}
