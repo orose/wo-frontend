@@ -1,5 +1,38 @@
 .main-nav {
-  border: 1px solid #ddd;
-  border-radius: 1rem;
   background-color: #fff;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    text-align: left;
+  }
+  a {
+    padding: 1rem;
+    text-decoration: none;
+    display: block;
+  }
+  .active {
+    background-color: #ededed;
+    color: #2f323e;
+  }
+}
+@media (min-width: 500px) {
+  nav ul {
+    display: flex;
+    li {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+@media (min-width: 700px) {
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    li {
+      text-align: left;
+    }
+  }
 }

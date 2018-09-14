@@ -9,6 +9,11 @@ class MainNav extends Component {
       <nav className="main-nav">
         <ul>
           <li>
+            <NavLink to="/" exact>
+              Workorder system
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/customer">Customer</NavLink>
           </li>
           <li>
