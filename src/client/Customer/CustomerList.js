@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 import { fetchCustomers } from '../actions';
 
 class CustomerList extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCustomers());
-  }
   render() {
     const { customers, isFetching } = this.props;
     let customerList = [];
@@ -31,11 +27,9 @@ class CustomerList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    customers: state.customers.items,
-    isFetching: state.customers.isFetching,
-  };
-}
+CustomerList.propTypes = {
+  isFetching: PropTypes.bool,
+  customers: PropTypes.array,
+};
 
-export default connect(mapStateToProps)(CustomerList);
+export default CustomerList;
