@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.scss';
 
-import Header from './common/Header';
+import MainHeader from './common/MainHeader';
 import PageHeader from './common/PageHeader';
 import MainNav from './common/MainNav';
 import Customer from './Customer';
@@ -13,7 +13,7 @@ export default class App extends Component {
     return (
       <Router>
         <div className="wrapper">
-          <Header />
+          <MainHeader />
           <MainNav />
           <PageHeader text="Pageheader" />
           <section className="content">
