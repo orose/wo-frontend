@@ -1,17 +1,17 @@
-const customers = (
-  state = [
-    {
-      id: 0,
-      name: 'Rose Webutvikling',
-    },
-    {
-      id: 1,
-      name: 'Systek AS',
-    },
-  ],
-  action,
-) => {
+import { CUSTOMERS_RECEIVE, CUSTOMERS_REQUEST } from '../actions';
+
+const customers = (state = [], action) => {
   switch (action.type) {
+    case CUSTOMERS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case CUSTOMERS_RECEIVE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.customers,
+        lastUpdated: action.receivedAt,
+      });
     case 'ADD_CUSTOMER':
       return [
         ...state,

@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { fetchCustomers } from '../actions';
 
 class CustomerList extends Component {
   componentDidMount() {
-    console.log('joda');
+    const { dispatch } = this.props;
+    dispatch(fetchCustomers());
   }
   render() {
-    const { customers } = this.props;
-    const customerList = customers.map(c => <li key={c.id}>{c.name}</li>);
+    const { customers, isFetching } = this.props;
+    let customerList = [];
 
-    return <ul>{customerList}</ul>;
+    if (!isFetching && customers) {
+      customerList = customers.map(w => (
+        <li key={w.id}>
+          <strong>{w.name}</strong>
+          <br />
+        </li>
+      ));
+      return <ul>{customerList}</ul>;
+    }
+
+    if (isFetching) {
+      return <p>Loading...</p>;
+    }
+
+    return null;
   }
 }
 
-export default CustomerList;
+function mapStateToProps(state) {
+  return {
+    customers: state.customers.items,
+    isFetching: state.customers.isFetching,
+  };
+}
+
+export default connect(mapStateToProps)(CustomerList);
