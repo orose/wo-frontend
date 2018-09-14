@@ -4,18 +4,19 @@ import { connect } from 'react-redux';
 import WorkorderList from './WorkorderList';
 import ComponentHeader from '../common/ComponentHeader';
 
-import { fetchWorkorders } from '../actions';
+import { fetchWorkorders, updatePageTitle } from '../actions';
 
 class Workorder extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchWorkorders());
+    dispatch(updatePageTitle('Workorder page'));
   }
 
   render() {
     return (
       <section>
-        <ComponentHeader text="Workorder" />
+        <ComponentHeader text="All workorders" />
         <WorkorderList
           workorders={this.props.workorders}
           isFetching={this.props.isFetching}

@@ -15,7 +15,7 @@ export default class App extends Component {
         <div className="wrapper">
           <MainHeader />
           <MainNav />
-          <PageHeader text="Pageheader" />
+          <PageHeader />
           <section className="content">
             <Route path="/customer" component={Customer} />
             <Route path="/workorder" component={Workorder} />

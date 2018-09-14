@@ -2,6 +2,7 @@ export const WORKORDERS_REQUEST = 'WORKORDERS_REQUEST';
 export const WORKORDERS_RECEIVE = 'WORKORDERS_RECEIVE';
 export const CUSTOMERS_REQUEST = 'CUSTOMERS_REQUEST';
 export const CUSTOMERS_RECEIVE = 'CUSTOMERS_RECEIVE';
+export const UPDATE_PAGE_TITLE = 'UPDATE_PAGE_TITLE';
 
 function requestWorkorders() {
   return {
@@ -46,5 +47,12 @@ export function fetchCustomers() {
     return fetch('/api/customers')
       .then(response => response.json())
       .then(json => dispatch(receiveCustomers(json)));
+  };
+}
+
+export function updatePageTitle(title) {
+  return {
+    type: UPDATE_PAGE_TITLE,
+    title: title,
   };
 }
