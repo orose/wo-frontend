@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { fetchWorkorders } from '../actions';
 
 class WorkorderList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchWorkorders());
-  }
-
   render() {
     const { workorders, isFetching } = this.props;
     let workorderList = [];
@@ -37,11 +25,9 @@ class WorkorderList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    workorders: state.workorders.items,
-    isFetching: state.workorders.isFetching,
-  };
-}
+WorkorderList.propTypes = {
+  isFetching: PropTypes.bool,
+  workorders: PropTypes.array,
+};
 
-export default connect(mapStateToProps)(WorkorderList);
+export default WorkorderList;

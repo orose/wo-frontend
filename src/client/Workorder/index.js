@@ -3,23 +3,31 @@ import { connect } from 'react-redux';
 
 import WorkorderList from './WorkorderList';
 
+import { fetchWorkorders } from '../actions';
+
 class Workorder extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchWorkorders());
+  }
+
   render() {
     return (
       <section>
         <h1>Workorder</h1>
-        <WorkorderList workorders={this.props.workorders} />
+        <WorkorderList
+          workorders={this.props.workorders}
+          isFetching={this.props.isFetching}
+        />
       </section>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { workorders, customers } = state;
-
   return {
-    customers,
-    workorders,
+    workorders: state.workorders.items,
+    isFetching: state.workorders.isFetching,
   };
 }
 
