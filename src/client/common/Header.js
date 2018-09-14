@@ -3,7 +3,7 @@ import './Header.scss';
 
 class Header extends Component {
   render() {
-    return <header className="main-head">Workorder system</header>;
+    return <header className="main-head" />;
   }
 }
 
