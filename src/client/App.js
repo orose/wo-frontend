@@ -5,6 +5,7 @@ import './App.scss';
 import MainHeader from './common/MainHeader';
 import PageHeader from './common/PageHeader';
 import MainNav from './common/MainNav';
+import Home from './Home';
 import Customer from './Customer';
 import Workorder from './Workorder';
 
@@ -17,6 +18,7 @@ export default class App extends Component {
           <MainNav />
           <PageHeader />
           <section className="content">
+            <Route path="/" exact component={Home} />
             <Route path="/customer" component={Customer} />
             <Route path="/workorder" component={Workorder} />
           </section>
