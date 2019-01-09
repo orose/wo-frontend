@@ -1,24 +1,15 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  let data = [
-    {
-      id: 0,
-      customer_id: 1,
-      title: 'First workorder',
-      description: 'This is the description of the first workorder',
+  request.get(
+    'http://localhost:8081/api/workorders',
+    (error, response, body) => {
+      let data = JSON.parse(body);
+      res.json(data._embedded.workorders);
     },
-    {
-      id: 1,
-      customer_id: 0,
-      title: 'Second workorder',
-      description: 'This is the description of the second workorder',
-    },
-  ];
-  setTimeout(function() {
-    res.json(data);
-  }, 1000);
+  );
 });
 
 module.exports = router;

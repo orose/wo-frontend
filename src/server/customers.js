@@ -1,20 +1,15 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  let data = [
-    {
-      id: 0,
-      name: 'Rose Webutvikling',
+  request.get(
+    'http://localhost:8081/api/customers',
+    (error, response, body) => {
+      let data = JSON.parse(body);
+      res.json(data._embedded.customers);
     },
-    {
-      id: 1,
-      name: 'Systek As',
-    },
-  ];
-  setTimeout(function() {
-    res.json(data);
-  }, 1000);
+  );
 });
 
 module.exports = router;
