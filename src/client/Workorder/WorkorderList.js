@@ -7,8 +7,8 @@ class WorkorderList extends Component {
     let workorderList = [];
 
     if (!isFetching && workorders) {
-      workorderList = workorders.map(w => (
-        <li key={w.id}>
+      workorderList = workorders.map((w, index) => (
+        <li key={index}>
           <strong>{w.title}</strong>
           <br />
           {w.description}

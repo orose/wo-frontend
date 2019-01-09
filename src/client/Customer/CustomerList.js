@@ -10,9 +10,9 @@ class CustomerList extends Component {
     let customerList = [];
 
     if (!isFetching && customers) {
-      customerList = customers.map(w => (
-        <li key={w.id}>
-          <strong>{w.name}</strong>
+      customerList = customers.map((c, index) => (
+        <li key={index}>
+          <strong>{c.name}</strong>
           <br />
         </li>
       ));
