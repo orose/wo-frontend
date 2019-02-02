@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fakeAuthCentralState from '../common/fakeAuthCentralState';
+import LoginForm from './LoginForm';
 
 class Login extends Component {
   constructor(props) {
@@ -28,8 +29,7 @@ class Login extends Component {
 
     return (
       <div>
-        <p>Please, you need to be authenticated to to view this content</p>
-        <button onClick={this.login}>Log in</button>
+        <LoginForm login={this.login} />
       </div>
     );
   }
