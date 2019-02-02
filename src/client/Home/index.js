@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import ComponentHeader from '../common/ComponentHeader';
 import InfoBox from '../InfoBox';
+import MainHeader from '../common/MainHeader';
+import PageHeader from '../common/PageHeader';
+import MainNav from '../common/MainNav';
 
 import './Home.scss';
 
@@ -17,40 +20,23 @@ class Customer extends Component {
 
   render() {
     return (
-      <section className="page-container-home">
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-        <InfoBox
-          title="Fin tittel"
-          text="Dette er litt tekst. Dette er litt tekst."
-        />
-      </section>
+      <div>
+        <MainHeader />
+        <MainNav />
+        <PageHeader />
+        <section className="content">
+          <section className="page-container-home">
+            <InfoBox
+              title="Fin tittel"
+              text="Dette er litt tekst. Dette er litt tekst."
+            />
+            <InfoBox
+              title="Fin tittel"
+              text="Dette er litt tekst. Dette er litt tekst."
+            />
+          </section>
+        </section>
+      </div>
     );
   }
 }

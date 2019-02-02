@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import WorkorderList from './WorkorderList';
 import ComponentHeader from '../common/ComponentHeader';
+import MainHeader from '../common/MainHeader';
+import PageHeader from '../common/PageHeader';
+import MainNav from '../common/MainNav';
 
 import { fetchWorkorders, updatePageTitle } from '../actions';
 
@@ -15,13 +18,20 @@ class Workorder extends Component {
 
   render() {
     return (
-      <section>
-        <ComponentHeader text="All workorders" />
-        <WorkorderList
-          workorders={this.props.workorders}
-          isFetching={this.props.isFetching}
-        />
-      </section>
+      <div>
+        <MainHeader />
+        <MainNav />
+        <PageHeader />
+        <section className="content">
+          <section>
+            <ComponentHeader text="All workorders" />
+            <WorkorderList
+              workorders={this.props.workorders}
+              isFetching={this.props.isFetching}
+            />
+          </section>
+        </section>
+      </div>
     );
   }
 }
