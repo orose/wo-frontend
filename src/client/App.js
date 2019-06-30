@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  withRouter,
-} from 'react-router-dom';
-import './App.scss';
+import React, { Component } from "react";
+import "typeface-roboto";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 
-import MainHeader from './common/MainHeader';
-import PageHeader from './common/PageHeader';
-import MainNav from './common/MainNav';
-import ProtectedRoute from './common/ProtectedRoute';
-import Home from './Home';
-import Customer from './Customer';
-import Workorder from './Workorder';
-import Login from './Login';
+import ProtectedRoute from "./common/ProtectedRoute";
+
+import About from "./About";
+import Login from "./Login";
+import MainHeader from "./MainHeader";
+import Workorder from "./Workorder";
 
 const Public = () => <h3>Public Content</h3>;
 const Protected = () => <h3>Protected Content</h3>;
@@ -23,12 +17,13 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className="wrapper">
+        <React.Fragment>
+          <CssBaseline />
+          <MainHeader />
           <Route path="/login" component={withRouter(Login)} />
-          <ProtectedRoute path="/" exact component={Home} />
-          <ProtectedRoute path="/customer" component={Customer} />
+          <Route path="/about" component={withRouter(About)} />
           <ProtectedRoute path="/workorder" component={Workorder} />
-        </div>
+        </React.Fragment>
       </Router>
     );
   }
