@@ -45,10 +45,20 @@ class Login extends Component {
   }
 
   login = () => {
+    /*
     fakeAuthCentralState.authenticate(() => {
       this.setState(() => ({
         redirectToReferrer: true
       }));
+    });
+    */
+    fetch("/api/getUsername", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      }
+      //body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
   };
 
@@ -57,9 +67,11 @@ class Login extends Component {
     const { redirectToReferrer } = this.state;
     const { classes } = this.props;
 
+    /*
     if (redirectToReferrer === true) {
       this.props.history.push(from.pathname);
     }
+    */
 
     return (
       <Container component="main" maxWidth="xs">
