@@ -52,12 +52,16 @@ class Login extends Component {
       }));
     });
     */
-    fetch("/api/getUsername", {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+    fetch("/api/login", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
-      }
+      },
+      body: JSON.stringify({
+        email: "oystein.rose@gmail.com",
+        password: "hemmelig"
+      })
       //body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
   };
