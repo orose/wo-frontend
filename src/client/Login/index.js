@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import fakeAuthCentralState from "../common/fakeAuthCentralState";
 
 import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Link as RouterLink } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 
@@ -39,9 +44,21 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
+    this.handleInputChange = this.handleInputChange.bind(this);
+
     this.state = {
-      redirectToReferrer: false
+      redirectToReferrer: false,
+      tempEmail: "",
+      tempPassword: ""
     };
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({ [name]: value });
   }
 
   login = () => {
@@ -59,8 +76,8 @@ class Login extends Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
-        email: "oystein.rose@gmail.com",
-        password: "hemmelig"
+        email: this.state.tempEmail,
+        password: this.state.tempPassword
       })
       //body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
@@ -86,7 +103,50 @@ class Login extends Component {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <LoginForm login={this.login} />
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="tempEmail"
+              autoComplete="email"
+              autoFocus
+              type="email"
+              value={this.state.tempEmail}
+              onChange={this.handleInputChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="tempPassword"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={this.state.tempPassword}
+              onChange={this.handleInputChange}
+            />
+            <Button onClick={this.login} fullWidth variant="contained" color="primary" className={classes.submit}>
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link component={RouterLink} to="/forgot-password" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link component={RouterLink} to="/sign-up" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
         </div>
       </Container>
     );

@@ -11,19 +11,20 @@ router.post("/", function(req, res) {
     },
     function(error, response, body) {
       if (response.statusCode === 200) {
-        console.log("Authorization succeeded for user " + req.body.email);
-        console.log(response.headers.authorization);
-      } else if (response.statusCode === 403) {
+        res.status(200).json({ token: extractToken(response.headers.authorization) });
+      } else {
         console.log("Authorization failed for user " + req.body.email);
+        res.status(response.statusCode).json({ errorMessage: "Authentication failed for user " + req.body.email });
       }
-      res.sendStatus(response.statusCode);
     }
   );
-  //request.post("http://localhost:8080/login", (error, response, body) => {
-  //console.log("body: ", body);
-  //let data = JSON.parse(body);
-  //res.json(data._embedded.workorders);
-  //});
 });
+
+function extractToken(authorizationHeader) {
+  if (authorizationHeader !== undefined && authorizationHeader !== null) {
+    return authorizationHeader.replace("Bearer ", "");
+  }
+  return null;
+}
 
 module.exports = router;
