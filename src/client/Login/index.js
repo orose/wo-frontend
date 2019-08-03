@@ -12,8 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 
-import LoginForm from "./LoginForm";
-
 const styles = {
   "@global": {
     body: {
