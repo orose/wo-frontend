@@ -77,8 +77,19 @@ class Login extends Component {
         email: this.state.tempEmail,
         password: this.state.tempPassword
       })
-      //body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
+    })
+      .then(function(response) {
+        if (response.status === 200) {
+          console.log("OK");
+          return response.json();
+        } else {
+          console.error("Authentication failed");
+        }
+      })
+      .then(function(response) {
+        if (response !== undefined) console.log(response);
+      })
+      .catch(error => console.error(error));
   };
 
   render() {
