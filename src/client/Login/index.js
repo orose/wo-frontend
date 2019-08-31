@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import fakeAuthCentralState from "../common/fakeAuthCentralState";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -60,23 +61,17 @@ class Login extends Component {
   }
 
   login = () => {
-    /*
-    fakeAuthCentralState.authenticate(() => {
-      this.setState(() => ({
-        redirectToReferrer: true
-      }));
+    let credentials = JSON.stringify({
+      email: this.state.tempEmail,
+      password: this.state.tempPassword
     });
-    */
     fetch("/api/login", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({
-        email: this.state.tempEmail,
-        password: this.state.tempPassword
-      })
+      body: credentials
     })
       .then(function(response) {
         if (response.status === 200) {
@@ -91,6 +86,10 @@ class Login extends Component {
       })
       .catch(error => console.error(error));
   };
+
+  mapStateToProps(state, ownProps) {
+    return {};
+  }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
@@ -162,4 +161,11 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login);
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(Login));
