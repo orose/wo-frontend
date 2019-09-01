@@ -5,7 +5,8 @@ export const CUSTOMERS_RECEIVE = "CUSTOMERS_RECEIVE";
 export const UPDATE_PAGE_TITLE = "UPDATE_PAGE_TITLE";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_RECEIVE = "LOGIN_RECEIVE";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export function login(username, password) {
   let credentials = JSON.stringify({
@@ -32,6 +33,7 @@ export function login(username, password) {
         }
       })
       .then(function(response) {
+        dispatch(loginSuccess(response));
         if (response !== undefined) console.log(response);
       })
       .catch(error => console.error(error));
@@ -44,16 +46,22 @@ export function login(username, password) {
   };
 }
 
-function loginRequest(username, password) {
-  console.log("action", username);
+function loginRequest() {
   return {
     type: LOGIN_REQUEST
   };
 }
 
-function loginReceive() {
+function loginSuccess(json) {
   return {
-    type: WORKORDERS_REQUEST
+    type: LOGIN_SUCCESS,
+    token: json
+  };
+}
+
+function loginFailure() {
+  return {
+    type: LOGIN_FAILURE
   };
 }
 
