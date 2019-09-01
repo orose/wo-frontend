@@ -20,14 +20,14 @@ export function login(username, password) {
         if (response.ok) {
           return response.json();
         } else {
-          throw Error(`Request rejected with status ${response.status}`);
+          throw response.status;
         }
       })
       .then(function(response) {
         dispatch(loginSuccess(response));
       })
-      .catch(function(error) {
-        dispatch(loginFailure());
+      .catch(function(status) {
+        dispatch(loginFailure(status));
       });
   };
 }
@@ -47,9 +47,10 @@ function loginSuccess(json) {
   };
 }
 
-function loginFailure() {
+function loginFailure(error) {
   return {
     type: LOGIN_FAILURE,
+    error: error,
     isFetching: false
   };
 }
