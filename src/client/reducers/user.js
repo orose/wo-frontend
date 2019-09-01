@@ -7,6 +7,7 @@ const user = (state = {}, action) => {
         isFetching: action.isFetching
       });
     case LOGIN_SUCCESS:
+      sessionStorage.setItem("jwtToken", action.data.token);
       return Object.assign({}, state, {
         isFetching: action.isFetching,
         jwtToken: action.data.token

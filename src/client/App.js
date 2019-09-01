@@ -21,7 +21,7 @@ export default class App extends Component {
           <CssBaseline />
           <MainHeader />
           <Route path="/login" component={withRouter(Login)} />
-          <Route path="/about" component={withRouter(About)} />
+          <ProtectedRoute path="/about" component={withRouter(About)} />
           <ProtectedRoute path="/workorder" component={Workorder} />
         </React.Fragment>
       </Router>

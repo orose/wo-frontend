@@ -1,5 +1,9 @@
 const fakeAuthCentralState = {
-  isAuthenticated: false,
+  //sessionStorage.getItem('jwtToken');
+  //isAuthenticated: false,
+  isAuthenticated() {
+    return sessionStorage["jwtToken"] !== undefined;
+  },
   authenticate(callback) {
     this.isAuthenticated = true;
     setTimeout(callback, 300);
@@ -7,7 +11,7 @@ const fakeAuthCentralState = {
   signout(callback) {
     this.isAuthenticated = false;
     setTimeout(callback, 300);
-  },
+  }
 };
 
 export default fakeAuthCentralState;
