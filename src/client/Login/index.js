@@ -13,6 +13,8 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 
+import { login } from "../actions";
+
 const styles = {
   "@global": {
     body: {
@@ -60,31 +62,8 @@ class Login extends Component {
     this.setState({ [name]: value });
   }
 
-  login = () => {
-    let credentials = JSON.stringify({
-      email: this.state.tempEmail,
-      password: this.state.tempPassword
-    });
-    fetch("/api/login", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: credentials
-    })
-      .then(function(response) {
-        if (response.status === 200) {
-          console.log("OK");
-          return response.json();
-        } else {
-          console.error("Authentication failed");
-        }
-      })
-      .then(function(response) {
-        if (response !== undefined) console.log(response);
-      })
-      .catch(error => console.error(error));
+  handleLogin = () => {
+    this.props.onLogin(this.state.tempEmail, this.state.tempPassword);
   };
 
   mapStateToProps(state, ownProps) {
@@ -139,7 +118,7 @@ class Login extends Component {
               value={this.state.tempPassword}
               onChange={this.handleInputChange}
             />
-            <Button onClick={this.login} fullWidth variant="contained" color="primary" className={classes.submit}>
+            <Button onClick={this.handleLogin} fullWidth variant="contained" color="primary" className={classes.submit}>
               Sign In
             </Button>
             <Grid container>
@@ -165,7 +144,13 @@ function mapStateToProps(state) {
   return {};
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onLogin: (username, password) => dispatch(login(username, password))
+  };
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withStyles(styles)(Login));
