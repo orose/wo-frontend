@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
 
-import workorders from "./workorder";
-import global from "./global";
+import user from "./user";
 
 export default combineReducers({
-  global,
-  workorders
+  user
 });

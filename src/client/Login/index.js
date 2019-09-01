@@ -66,10 +66,6 @@ class Login extends Component {
     this.props.onLogin(this.state.tempEmail, this.state.tempPassword);
   };
 
-  mapStateToProps(state, ownProps) {
-    return {};
-  }
-
   render() {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer } = this.state;
@@ -118,7 +114,13 @@ class Login extends Component {
               value={this.state.tempPassword}
               onChange={this.handleInputChange}
             />
-            <Button onClick={this.handleLogin} fullWidth variant="contained" color="primary" className={classes.submit}>
+            <Button
+              onClick={this.handleLogin}
+              disabled={this.props.isFetching}
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}>
               Sign In
             </Button>
             <Grid container>
@@ -140,8 +142,10 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
+function mapStateToProps(state, ownProps) {
+  return {
+    isFetching: state.user.isFetching
+  };
 }
 
 function mapDispatchToProps(dispatch) {
