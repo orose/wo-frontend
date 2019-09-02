@@ -10,9 +10,6 @@ import Login from "./Login";
 import MainHeader from "./MainHeader";
 import Workorder from "./Workorder";
 
-const Public = () => <h3>Public Content</h3>;
-const Protected = () => <h3>Protected Content</h3>;
-
 export default class App extends Component {
   render() {
     return (
@@ -22,7 +19,7 @@ export default class App extends Component {
           <MainHeader />
           <Route path="/login" component={withRouter(Login)} />
           <ProtectedRoute path="/about" component={withRouter(About)} />
-          <ProtectedRoute path="/workorder" component={Workorder} />
+          <ProtectedRoute path="/workorders" component={withRouter(Workorder)} />
         </React.Fragment>
       </Router>
     );
