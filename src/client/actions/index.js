@@ -13,9 +13,7 @@ export function fetchWorkorders(offset, limit) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJveXN0ZWluLnJvc2VAZ21haWwuY29tIiwiZXhwIjoxNTY4MjIyNTg5fQ.27XVfbJBaysayouF_ge1GiJKl21yh05ycuNKPYwq86dkpyuue9RKEPLmhJilihmH1gtHPHTJrPxsOabW0Dzz0Q"
-        //Authorization: "Bearer " + sessionStorage["jwtToken"]
+        Authorization: "Bearer " + sessionStorage["jwtToken"]
       }
     })
       .then(function(response) {
