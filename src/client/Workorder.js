@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Typography } from "@material-ui/core";
+import { Typography, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
 import { fetchWorkorders } from "./actions";
@@ -15,10 +15,17 @@ const styles = {
 
 class Workorder extends Component {
   render() {
-    const items = [];
+    const rows = [];
     if (this.props.workorderList !== undefined) {
       this.props.workorderList.data.map((value, index) => {
-        items.push(<li key={index}>{value.title}</li>);
+        //items.push(<li key={index}>{value.title}</li>);
+        rows.push(
+          <TableRow key={index}>
+            <TableCell>{value.id}</TableCell>
+            <TableCell>{value.title}</TableCell>
+            <TableCell>{value.description}</TableCell>
+          </TableRow>
+        );
       });
     }
     return (
@@ -26,7 +33,18 @@ class Workorder extends Component {
         <Typography variant="h3" component="h2" align="center">
           Workorder
         </Typography>
-        <ul>{items}</ul>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Id</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{rows}</TableBody>
+          </Table>
+        </Paper>
       </Fragment>
     );
   }
