@@ -35,6 +35,9 @@ class MainHeader extends Component {
             <Link component={RouterLink} variant="button" color="textPrimary" to="/about" className={classes.link}>
               About
             </Link>
+            <Link component={RouterLink} variant="button" color="textPrimary" to="/profile" className={classes.link}>
+              Profile
+            </Link>
           </nav>
           <Button component={RouterLink} to="/login" color="primary" variant="outlined">
             Login

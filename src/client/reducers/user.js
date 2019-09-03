@@ -1,4 +1,11 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  USERINFO_REQUEST,
+  USERINFO_SUCCESS,
+  USERINFO_FAILURE
+} from "../actions";
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +29,20 @@ const user = (state = {}, action) => {
           description: action.workorder.description
         }
       ];
+    case USERINFO_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case USERINFO_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        data: action.data
+      });
+    case USERINFO_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        data: null
+      });
     default:
       return state;
   }

@@ -9,6 +9,7 @@ import About from "./About";
 import Login from "./Login";
 import MainHeader from "./MainHeader";
 import Workorder from "./Workorder";
+import UserProfile from "./UserProfile";
 
 export default class App extends Component {
   render() {
@@ -18,8 +19,9 @@ export default class App extends Component {
           <CssBaseline />
           <MainHeader />
           <Route path="/login" component={withRouter(Login)} />
-          <ProtectedRoute path="/about" component={withRouter(About)} />
+          <Route path="/about" component={withRouter(About)} />
           <ProtectedRoute path="/workorders" component={withRouter(Workorder)} />
+          <ProtectedRoute path="/profile" component={withRouter(UserProfile)} />
         </React.Fragment>
       </Router>
     );

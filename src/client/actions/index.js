@@ -6,6 +6,58 @@ export const WORKORDERS_REQUEST = "WORKORDERS_REQUEST";
 export const WORKORDERS_SUCCESS = "WORKORDERS_SUCCESS";
 export const WORKORDERS_FAILURE = "WORKORDERS_FAILURE";
 
+export const USERINFO_REQUEST = "USERINFO_REQUEST";
+export const USERINFO_SUCCESS = "USERINFO_SUCCESS";
+export const USERINFO_FAILURE = "USERINFO_FAILURE";
+
+export function fetchUserinfo() {
+  return dispatch => {
+    dispatch(requestUserinfo());
+    fetch("/api/userinfo", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage["jwtToken"]
+      }
+    })
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response.status;
+        }
+      })
+      .then(function(response) {
+        dispatch(fetchUserinfoSuccess(response));
+      })
+      .catch(function(status) {
+        dispatch(fetchUserinfoFailure(status));
+      });
+  };
+}
+
+function requestUserinfo() {
+  return {
+    type: USERINFO_REQUEST,
+    isFetching: true
+  };
+}
+
+function fetchUserinfoSuccess(json) {
+  return {
+    type: USERINFO_SUCCESS,
+    isFetching: false,
+    data: json
+  };
+}
+
+function fetchUserinfoFailure(json) {
+  return {
+    type: USERINFO_FAILURE,
+    isFetching: false
+  };
+}
+
 export function fetchWorkorders(offset, limit) {
   return dispatch => {
     dispatch(requestWorkorders(offset, limit));
@@ -17,7 +69,6 @@ export function fetchWorkorders(offset, limit) {
       }
     })
       .then(function(response) {
-        console.log(response);
         if (response.ok) {
           return response.json();
         } else {
