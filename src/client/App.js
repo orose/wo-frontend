@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "typeface-roboto";
+import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 
@@ -18,10 +19,12 @@ export default class App extends Component {
         <React.Fragment>
           <CssBaseline />
           <MainHeader />
-          <Route path="/login" component={withRouter(Login)} />
-          <Route path="/about" component={withRouter(About)} />
-          <ProtectedRoute path="/workorders" component={withRouter(Workorder)} />
-          <ProtectedRoute path="/profile" component={withRouter(UserProfile)} />
+          <Container maxWidth="lg">
+            <Route path="/login" component={withRouter(Login)} />
+            <Route path="/about" component={withRouter(About)} />
+            <ProtectedRoute path="/workorders" component={withRouter(Workorder)} />
+            <ProtectedRoute path="/profile" component={withRouter(UserProfile)} />
+          </Container>
         </React.Fragment>
       </Router>
     );
