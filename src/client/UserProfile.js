@@ -14,12 +14,27 @@ const styles = {
 };
 
 class UserProfile extends Component {
+  displayName() {
+    if (this.props.userinfo !== undefined) {
+      return (
+        <Fragment>
+          <p>
+            <strong>Name:</strong> {this.props.userinfo.firstname + " " + this.props.userinfo.lastname}
+          </p>
+          <p>
+            <strong>E-mail:</strong> {this.props.userinfo.email}
+          </p>
+        </Fragment>
+      );
+    }
+  }
   render() {
     return (
       <Fragment>
         <Typography variant="h3" component="h2" align="center">
           User profile
         </Typography>
+        <Fragment>{this.displayName()}</Fragment>
       </Fragment>
     );
   }
@@ -31,7 +46,7 @@ class UserProfile extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     isFetching: state.user.isFetching,
-    userinfo: state.userinfo
+    userinfo: state.user.data
   };
 }
 
