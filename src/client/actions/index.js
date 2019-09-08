@@ -132,6 +132,7 @@ export function login(username, password) {
       })
       .then(function(response) {
         dispatch(loginSuccess(response));
+        window.location.href = "/";
       })
       .catch(function(status) {
         dispatch(loginFailure(status));
