@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Typography, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
-import { fetchWorkorders } from "./actions";
+import { fetchSingleWorkorder } from "./actions";
 
 const styles = {
   "@global": {
@@ -15,54 +15,35 @@ const styles = {
 
 class Workorder extends Component {
   render() {
-    const rows = [];
-    if (this.props.workorderList !== undefined) {
-      this.props.workorderList.data.map((value, index) => {
-        //items.push(<li key={index}>{value.title}</li>);
-        rows.push(
-          <TableRow key={index}>
-            <TableCell>{value.id}</TableCell>
-            <TableCell>{value.title}</TableCell>
-            <TableCell>{value.description}</TableCell>
-          </TableRow>
-        );
-      });
-    }
+    if (this.props.workorder === undefined) return null;
+
     return (
       <Fragment>
         <Typography variant="h3" component="h2" align="center">
-          Workorder
+          Workorder details
         </Typography>
         <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Description</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{rows}</TableBody>
-          </Table>
+          <p>The id is: {this.props.workorder.id}</p>
+          <p>The title is: {this.props.workorder.title}</p>
         </Paper>
       </Fragment>
     );
   }
   componentDidMount() {
-    this.props.fetchWorkorders();
+    this.props.fetchWorkorder(this.props.match.params.id);
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    isFetching: state.user.isFetching,
-    workorderList: state.workorders.list
+    isFetching: state.workorders.isFetching,
+    workorder: state.workorders.current
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchWorkorders: () => dispatch(fetchWorkorders())
+    fetchWorkorder: id => dispatch(fetchSingleWorkorder(id))
   };
 }
 

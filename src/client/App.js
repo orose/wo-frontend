@@ -10,6 +10,7 @@ import About from "./About";
 import Login from "./Login";
 import MainHeader from "./MainHeader";
 import Workorder from "./Workorder";
+import WorkorderList from "./WorkorderList";
 import UserProfile from "./UserProfile";
 
 export default class App extends Component {
@@ -22,7 +23,8 @@ export default class App extends Component {
           <Container maxWidth="lg">
             <Route path="/login" component={withRouter(Login)} />
             <Route path="/about" component={withRouter(About)} />
-            <ProtectedRoute path="/workorders" component={withRouter(Workorder)} />
+            <ProtectedRoute exact path="/workorder" component={withRouter(WorkorderList)} />
+            <ProtectedRoute path="/workorder/:id" component={withRouter(Workorder)} />
             <ProtectedRoute path="/profile" component={withRouter(UserProfile)} />
           </Container>
         </React.Fragment>

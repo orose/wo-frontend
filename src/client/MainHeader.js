@@ -29,7 +29,7 @@ class MainHeader extends Component {
             Workplanner
           </Typography>
           <nav>
-            <Link component={RouterLink} variant="button" color="textPrimary" to="/workorders" className={classes.link}>
+            <Link component={RouterLink} variant="button" color="textPrimary" to="/workorder" className={classes.link}>
               Workorder
             </Link>
             <Link component={RouterLink} variant="button" color="textPrimary" to="/about" className={classes.link}>
