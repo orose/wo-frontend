@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/styles";
 
 import { fetchSingleWorkorder } from "./actions";
 
+import WorkorderForm from "./WorkorderForm";
+
 const styles = {
   "@global": {
     body: {
@@ -15,7 +17,17 @@ const styles = {
 
 class Workorder extends Component {
   render() {
+    let form;
     if (this.props.workorder === undefined) return null;
+    if (!this.props.isFetching) {
+      form = (
+        <WorkorderForm
+          workorder={this.props.workorder}
+          isFetching={this.props.isFetching}
+          handleSave={this.handleSave}
+        />
+      );
+    }
 
     return (
       <Fragment>
@@ -25,12 +37,18 @@ class Workorder extends Component {
         <Paper>
           <p>The id is: {this.props.workorder.id}</p>
           <p>The title is: {this.props.workorder.title}</p>
+          {form}
         </Paper>
       </Fragment>
     );
   }
   componentDidMount() {
     this.props.fetchWorkorder(this.props.match.params.id);
+  }
+
+  handleSave(workorder) {
+    console.log("Handle save from Workorder.js");
+    console.log(workorder);
   }
 }
 
