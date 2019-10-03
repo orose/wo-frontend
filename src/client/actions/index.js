@@ -223,12 +223,14 @@ function loginFailure(error) {
 
 export function updateWorkorder(workorder) {
   let body = JSON.stringify(workorder);
+  console.log("body", body);
   return dispatch => {
     dispatch(updateWorkorderRequest());
     fetch("/api/workorder/" + workorder.id, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage["jwtToken"]
       },
       body: body
     })
@@ -241,7 +243,6 @@ export function updateWorkorder(workorder) {
       })
       .then(function(response) {
         dispatch(updateWorkorderSuccess(response));
-        window.location.href = "/";
       })
       .catch(function(status) {
         dispatch(updateWorkorderFailure(status));

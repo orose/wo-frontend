@@ -51,9 +51,6 @@ class Workorder extends Component {
   }
 
   handleSave(workorder) {
-    console.log("Handle save from Workorder.js");
-    console.log(workorder);
-    console.log(this.props);
     this.props.putWorkorder(workorder);
   }
 }
