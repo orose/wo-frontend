@@ -6,6 +6,10 @@ export const WORKORDERS_REQUEST = "WORKORDERS_REQUEST";
 export const WORKORDERS_SUCCESS = "WORKORDERS_SUCCESS";
 export const WORKORDERS_FAILURE = "WORKORDERS_FAILURE";
 
+export const WORKORDER_PUT_REQUEST = "WORKORDER_PUT_REQUEST";
+export const WORKORDER_PUT_SUCCESS = "WORKORDER_PUT_SUCCESS";
+export const WORKORDER_PUT_FAILURE = "WORKORDER_PUT_FAILURE";
+
 export const SINGLE_WORKORDER_REQUEST = "SINGLE_WORKORDER_REQUEST";
 export const SINGLE_WORKORDER_SUCCESS = "SINGLE_WORKORDER_SUCCESS";
 export const SINGLE_WORKORDER_FAILURE = "SINGLE_WORKORDER_FAILURE";
@@ -212,6 +216,57 @@ function loginSuccess(json) {
 function loginFailure(error) {
   return {
     type: LOGIN_FAILURE,
+    error: error,
+    isFetching: false
+  };
+}
+
+export function updateWorkorder(workorder) {
+  let body = JSON.stringify(workorder);
+  return dispatch => {
+    dispatch(updateWorkorderRequest());
+    fetch("/api/workorder/" + workorder.id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: body
+    })
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response.status;
+        }
+      })
+      .then(function(response) {
+        dispatch(updateWorkorderSuccess(response));
+        window.location.href = "/";
+      })
+      .catch(function(status) {
+        dispatch(updateWorkorderFailure(status));
+      });
+  };
+}
+
+function updateWorkorderRequest() {
+  return {
+    type: WORKORDER_PUT_REQUEST,
+    isFetching: true
+  };
+}
+
+function updateWorkorderSuccess(json) {
+  return {
+    type: WORKORDER_PUT_SUCCESS,
+    data: json,
+    isFetching: false
+  };
+}
+
+function updateWorkorderFailure(error) {
+  return {
+    type: WORKORDER_PUT_FAILURE,
     error: error,
     isFetching: false
   };

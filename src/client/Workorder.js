@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Typography, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
-import { fetchSingleWorkorder } from "./actions";
+import { fetchSingleWorkorder, updateWorkorder } from "./actions";
 
 import WorkorderForm from "./WorkorderForm";
 
@@ -16,6 +16,10 @@ const styles = {
 };
 
 class Workorder extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+  }
   render() {
     let form;
     if (this.props.workorder === undefined) return null;
@@ -49,6 +53,8 @@ class Workorder extends Component {
   handleSave(workorder) {
     console.log("Handle save from Workorder.js");
     console.log(workorder);
+    console.log(this.props);
+    this.props.putWorkorder(workorder);
   }
 }
 
@@ -61,7 +67,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchWorkorder: id => dispatch(fetchSingleWorkorder(id))
+    fetchWorkorder: id => dispatch(fetchSingleWorkorder(id)),
+    putWorkorder: workorder => dispatch(updateWorkorder(workorder))
   };
 }
 

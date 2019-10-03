@@ -35,12 +35,14 @@ class WorkorderForm extends Component {
   }
 
   componentDidMount() {
+    this.setState({ ["id"]: this.props.workorder.id });
     this.setState({ ["tempTitle"]: this.props.workorder.title });
     this.setState({ ["tempDescription"]: this.props.workorder.description });
   }
 
   onClick() {
     this.props.handleSave({
+      id: this.state.id,
       title: this.state.tempTitle,
       description: this.state.tempDescription
     });
